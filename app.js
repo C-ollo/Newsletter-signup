@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require('body-parser');
+const https = require('https');
 app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({encoded: true}));
@@ -26,11 +27,23 @@ app.post('/',(req,res)=>{
         ]
     };
     const jsonData = JSON.stringify(data);
+    const url = "https://us21.api.mailchimp.com/3.0/lists/1783363d92";
+    const options = {
+        method: "POST",
+        auth: "collins:f43b2e55caf5d4dadbef5f8379530c7a-us21"
+    }
+    const request = https.request(url,options,function(response){
+        response.on("data",function(data){
+            console.log(JSON.parse(data));
+        })
+    });
+    request.write(jsonData);
+    request.end();
     
 })
 app.listen(3000,()=>{
     console.log("server is running on 3000");
 });
 
+
 f43b2e55caf5d4dadbef5f8379530c7a-us21
-1783363d92
