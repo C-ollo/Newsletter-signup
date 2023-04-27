@@ -10,12 +10,27 @@ app.get('/',function(req,res){
 });
 
 app.post('/',(req,res)=>{
-    let first=req.body.firstName;
-    let last = req.body.lastName;
-    let email = req.body.email;
-    console.log(first,last,email);
+    const first=req.body.firstName;
+    const last = req.body.lastName;
+    const email = req.body.email;
+    const data = {
+        members: [
+            {
+                email_address: email,
+                status :"subscribed",
+                merge_fields: {
+                    FNAME: first,
+                    LNAME: last
+                }
+            }
+        ]
+    };
+    const jsonData = JSON.stringify(data);
     
 })
 app.listen(3000,()=>{
     console.log("server is running on 3000");
 });
+
+f43b2e55caf5d4dadbef5f8379530c7a-us21
+1783363d92
