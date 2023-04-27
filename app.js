@@ -33,6 +33,12 @@ app.post('/',(req,res)=>{
         auth: "collins:f43b2e55caf5d4dadbef5f8379530c7a-us21"
     }
     const request = https.request(url,options,function(response){
+        if (response.statusCode == 200){
+            res.sendFile(__dirname+'/success.html');
+        }
+        else{
+            res.sendFile(__dirname+'/failure.html');
+        }
         response.on("data",function(data){
             console.log(JSON.parse(data));
         })
@@ -46,4 +52,3 @@ app.listen(3000,()=>{
 });
 
 
-f43b2e55caf5d4dadbef5f8379530c7a-us21
